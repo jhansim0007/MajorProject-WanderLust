@@ -63,12 +63,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
-// app.use("/uploads", express.static("uploads"));
-
-//basic API
-// app.get("/", (req, res) => {
-//     res.send("Hi, I am root!!!");
-// });
 
 //middleware
 app.use(session(sessionOptions));
@@ -99,9 +93,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || "Something went wrong";
-    // res.status(statusCode).send(message);
-    // res.render("error.ejs", {err});
-    // res.status(err.status || 500);
     const stack = process.env.NODE_ENV === "development" ? err.stack : null;
     res.status(statusCode).render("error.ejs", {message, stack});
 });
